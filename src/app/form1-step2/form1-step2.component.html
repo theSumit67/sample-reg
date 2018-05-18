@@ -1,0 +1,68 @@
+<!--   2nd step  -->
+<form novalidate (ngSubmit)="onSubmit(secondaryInfo.value)" [formGroup]="secondaryInfo">
+	<div class="form-group row">
+		<label class="col-sm-3 col-form-label">Select Date</label>
+		<div class="col-sm-9">
+			<input formControlName="date" class="form-control" ngbDatepicker #ngbD="ngbDatepicker" (click)="ngbD.toggle();$event.stopPropagation()"
+			 (document:click)="ngbD.isOpen() ? ngbD.close() : ''" />
+
+			<div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger">
+
+				<div *ngIf="date.errors.required ">
+					Date is required.
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="form-group row">
+		<label class="col-sm-3 col-form-label">Contact</label>
+		<div class="col-sm-9">
+			<input placeholder="Your contact" formControlName="contact" class="form-control" />
+			<div *ngIf="contact.invalid && (contact.dirty || contact.touched)" class="alert alert-danger">
+				<div *ngIf="contact.errors.required ">
+					Contact is required.
+				</div>
+				<div *ngIf="contact.errors.minlength || contact.errors.maxlength">
+					Contact length should be between 10 - 100 characters.
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="form-group row">
+		<label class="col-sm-3 col-form-label">Gender</label>
+		<div class="col-sm-9">
+			<div class="form-check form-check-inline">
+				<label class="form-check-label">Male
+				<input class="form-check-input" type="radio" name="gender" formControlName="gender" value="male"></label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="form-check-label">Female
+				<input class="form-check-input" type="radio" name="gender" formControlName="gender" value="female"></label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="form-check-label">Other
+				<input class="form-check-input" type="radio" name="gender" formControlName="gender" value="other"></label>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Interesed 🌄🚵‍ </label>
+    <div class="col-sm-9">
+      <div class="form-check form-check-inline">
+		<label class="form-check-label" for="inlineCheckbox1">Yes
+        <input class="form-check-input" id="inlineCheckbox1" type="checkbox" formControlName="interested" value="yes"></label>
+      </div>
+    </div>
+	</div>
+
+	<button type="button" [disabled]="secondaryInfo.invalid" class="btn">Previous</button>
+	<button type="submit" [disabled]="secondaryInfo.invalid" class="btn">Sign up</button>
+
+</form>
